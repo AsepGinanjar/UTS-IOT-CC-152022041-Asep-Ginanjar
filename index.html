@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Cuaca</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Dashboard Cuaca</h1>
+        </header>
+
+        <main>
+            <section class="summary">
+                <h2>Ringkasan Data</h2>
+                <div class="card">
+                    <h3>Suhu Maksimum</h3>
+                    <p id="suhuMax">Loading...</p>
+                </div>
+                <div class="card">
+                    <h3>Suhu Minimum</h3>
+                    <p id="suhuMin">Loading...</p>
+                </div>
+                <div class="card">
+                    <h3>Rata-rata Suhu</h3>
+                    <p id="averageSuhu">Loading...</p>
+                </div>
+            </section>
+
+            <section class="details">
+                <h2>Detail Suhu & Kelembaban Maksimum</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Suhu</th>
+                            <th>Humid</th>
+                            <th>Lux</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="maxDetails">
+                        <tr>
+                            <td colspan="5">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="monthly">
+                <h2>Bulan-Tahun Maksimum</h2>
+                <ul id="monthYearList">
+                    <li>Loading...</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Fetch data dari API PHP
+        fetch('get.php')
+            .then(response => response.json())
+            .then(data => {
+                // Update ringkasan data
+                document.getElementById('suhuMax').textContent = data.suhumax + "°C";
+                document.getElementById('suhuMin').textContent = data.suhumin + "°C";
+                document.getElementById('averageSuhu').textContent = data.average + "°C";
+
+                // Update detail suhu & humid maksimum
+                const maxDetails = document.getElementById('maxDetails');
+                maxDetails.innerHTML = ""; // Kosongkan isi tabel
+                data.nilai_suhu_max_humid_max.forEach(item => {
+                    maxDetails.innerHTML += `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.suhu}°C</td>
+                            <td>${item.humid}%</td>
+                            <td>${item.Lux}</td>
+                            <td>${item.Timestamp}</td>
+                        </tr>
+                    `;
+                });
+
+                // Update daftar bulan-tahun maksimum
+                const monthYearList = document.getElementById('monthYearList');
+                monthYearList.innerHTML = ""; // Kosongkan isi daftar
+                data.month_year_max.forEach(item => {
+                    monthYearList.innerHTML += `<li>${item.month_year}</li>`;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+</html>

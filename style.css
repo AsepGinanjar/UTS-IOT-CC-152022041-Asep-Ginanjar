@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    margin-top: 20px;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin: 0;
+    color: #007BFF;
+}
+
+.details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.details th, .details td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.details th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.monthly ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.monthly li {
+    background: white;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
